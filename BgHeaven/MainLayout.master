@@ -48,8 +48,8 @@
             <div id="sidebar" class="sidebar">
 
                 <div class="btn-group" role="group" style="width: 100%;">
-                    <button type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
-                    <button type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
+                    <button id="login" type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
+                    <button id="register" type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
                 </div>
 
                 <hr />
@@ -90,10 +90,11 @@
         </div>
     </form>
 
-    <!-- A function that toggles sidebar -->
+    <!-- Sidebar scripts -->
     <script type="text/javascript">
-        var button = $("#menu-button");
 
+        // Toggling sidebar
+        var button = $("#menu-button");
         button.click(function () {
 
             if (this.className == "ion-chevron-right") {
@@ -104,6 +105,22 @@
 
             $("#sidebar").toggle("slide");
         });
-    </script>
+
+
+        // Toggling the logging / registration form
+        $("#login").click(function () {
+            $("#form1").append($('<div class="lightbox-bg">').load("Login.aspx"));
+        });
+
+        $("#register").click(function () {
+            $("#form1").append($('<div class="lightbox-bg">').load("Register.aspx"));
+        });
+
+        $(document).on("click", "#cancelButton", function () {
+            $("#cancelButton").parent().parent().parent().remove();
+        });
+
+    </script> 
+
 </body>
 </html>
