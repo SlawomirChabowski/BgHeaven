@@ -6,7 +6,7 @@
 <head runat="server">
 
     <title>
-        <asp:ContentPlaceHolder ID="TitlePlaceHolder" runat="server"></asp:ContentPlaceHolder> | BG Heaven
+        <asp:ContentPlaceHolder ID="TitlePlaceHolder" runat="server"></asp:ContentPlaceHolder>
     </title>
 
     <!-- Layout stylesheet -->
@@ -18,7 +18,7 @@
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+
     <!-- Bootstrap -->
     <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -31,31 +31,63 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="containter-fluid" style="width: 100%; height: 100%; position: fixed;">
+        <div class="containter-fluid" style="max-width: 100%; height: 100%;">
 
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a href="#">
-                <i id="menu-button" class="ion-ios-arrow-right"></i>
-            </a>
-        </nav>
+            <!-- Navbar -->
+            <div class="navbar navbar-expand-lg navbar-dark navbar-fill fixed-top">
+                <div style="width: 5%;">
+                    <button id="menu-button" type="button" class="ion-chevron-right"></button>
+                </div>
 
-        <!-- Sidebar -->
-        <div id="sidebar" class="sidebar">
+                <h1 id="logo">BgHeaven</h1>
 
-            <!-- Sidebar content -->
+                <div style="width: 5%;"></div>
+            </div>
 
-            <footer style="text-align: center;">
-                Author: Sławomir Chabowski
-            </footer>
+            <!-- Sidebar -->
+            <div id="sidebar" class="sidebar">
+
+                <div class="btn-group" role="group" style="width: 100%;">
+                    <button type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
+                    <button type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
+                </div>
+
+                <hr />
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search for images and users">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" id="basic-addon2"><i class="ion-search"></i></button>
+                    </div>
+                </div>
+
+                <hr />
+
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light" href="#">About</a>
+                    </li>
+                </ul>
+
+                <hr />
+                <footer style="text-align: center; display: block;">
+                    Author: <a href="https://github.com/SlawomirChabowski" class="author-link">Sławomir Chabowski <i class="ion-social-github"></i></a>
+                </footer>
+
+            </div>
+
+            <!-- Site content -->
+            <div id="content" class="container bg-light">
+                <asp:ContentPlaceHolder ID="WebsiteContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+            </div>
 
         </div>
-
-        <div class="container bg-light content">
-            <asp:ContentPlaceHolder id="WebsiteContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
-        </div>
-
-    </div>
     </form>
 
     <!-- A function that toggles sidebar -->
@@ -64,10 +96,10 @@
 
         button.click(function () {
 
-            if (this.className == "ion-ios-arrow-right") {
-                this.className = "ion-ios-arrow-left";
+            if (this.className == "ion-chevron-right") {
+                this.className = "ion-chevron-left";
             } else {
-                this.className = "ion-ios-arrow-right";
+                this.className = "ion-chevron-right";
             }
 
             $("#sidebar").toggle("slide");

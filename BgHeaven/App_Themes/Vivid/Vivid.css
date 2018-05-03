@@ -1,0 +1,11 @@
+﻿body {
+    background: linear-gradient(to right, #9C27B0, #AD1457);
+}
+
+.sidebar {
+    background-color: rgba(20, 20, 20, 0.95);
+}
+
+.navbar-fill {
+    background: linear-gradient(#202020, #282828);
+}
