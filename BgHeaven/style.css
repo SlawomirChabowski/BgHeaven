@@ -14,7 +14,7 @@ body {
     background-attachment: fixed;
 }
 
-.sidebar {
+#sidebar {
     display: none;
     position: fixed;
     overflow: auto;
@@ -24,15 +24,17 @@ body {
     padding-top: 75px;
     z-index: 101;
     color: #fff;
+    backdrop-filter: blur(10px);
+    background-color: rgba(20, 20, 20, 0.95);
 }
 
-    .sidebar a {
+    #sidebar a {
         display: block;
         width: 100%;
         margin: 1px 0;
     }
 
-    .sidebar hr {
+    #sidebar hr {
         background-color: #303030;
     }
 
@@ -54,15 +56,16 @@ body {
 
 .navbar-fill {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background: linear-gradient(#202020, #282828);
 }
 
 #menu-button, #menu-button:active, #menu-button:hover, #menu-button:visited {
     text-decoration: none;
     font-weight: 900;
-    color: #fff;
     background: none;
     border: none;
     outline: none;
+    color: #fff;
 }
 
 #logo {
@@ -79,7 +82,7 @@ body {
         columns: 1;
     }
 
-    .sidebar {
+    #sidebar {
         width: 100%;
         min-width: 100%;
     }
@@ -91,7 +94,7 @@ body {
         padding-top: 16px;
     }
 
-    .sidebar {
+    #sidebar {
         min-width: 300px;
     }
 }
@@ -102,13 +105,18 @@ body {
         padding-top: 16px;
     }
 
-    .sidebar {
+    #sidebar {
         min-width: 300px;
     }
 }
 
-.image-container img {
-    width: 100%;
+.thumb:hover {
+    transform: scale(1.05);
+    transition: all .1s;
+}
+
+.thumb {
+    transition: all .1s;
 }
 
 
@@ -121,6 +129,7 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
+    backdrop-filter: blur(10px);
 }
 
 @media only screen and (max-width: 768px) {

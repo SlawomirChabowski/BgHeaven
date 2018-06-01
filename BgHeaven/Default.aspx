@@ -16,7 +16,7 @@
 
     <h2>Recently added wallpapers</h2>
     <hr />
-    <script type="text/javascript">
+    <script>
 
         var i = 0;
         var shouldAsk = true;
@@ -34,6 +34,7 @@
 
                     // check if node is empty (contains 121 characters - comments and spaces)
                     if (response.length > 121) {
+                        $('#content').append("<hr />");
                         $('#content').append(newNode);
                         i++;
                     } else {

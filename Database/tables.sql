@@ -3,7 +3,7 @@ CREATE TABLE t_user (
 	id INT IDENTITY(1, 1) PRIMARY KEY,
 	name VARCHAR(30) NOT NULL UNIQUE,
 	email VARCHAR(500) NOT NULL UNIQUE CHECK (email LIKE '%@%.%'),
-	password VARCHAR(50) NOT NULL CHECK (LEN(password) >= 6),
+	password CHAR(96) NOT NULL CHECK (LEN(password) >= 6),
 	date_joined DATETIME DEFAULT GETDATE(),
 	last_active DATETIME DEFAULT GETDATE(),
 	rank INT DEFAULT 0,												-- 0 for normal user, 1 for moderator

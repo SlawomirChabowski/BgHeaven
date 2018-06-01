@@ -5,7 +5,7 @@
 INSERT INTO t_user (name, email, password, rank, about) VALUES (
 	'Admin',
 	'admin@somewebsite.com',
-	'passwd',
+	'851fab8375c23d5749c028b18f2844e754c30af17a11df995ea4faa8743ea67bb0ebf920332d9473d78bbdf9f47657ca',
 	1,
 	'I am an administrator of this website'
 );
@@ -13,7 +13,7 @@ INSERT INTO t_user (name, email, password, rank, about) VALUES (
 INSERT INTO t_user (name, email, password, about) VALUES (
 	'User',
 	'user@somewebsite.com',
-	'passwd',
+	'851fab8375c23d5749c028b18f2844e754c30af17a11df995ea4faa8743ea67bb0ebf920332d9473d78bbdf9f47657ca',
 	'I am a random user of this website'
 );
 

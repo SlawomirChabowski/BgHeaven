@@ -2,12 +2,14 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="pl">
 <head runat="server">
 
     <title>
         <asp:ContentPlaceHolder ID="TitlePlaceHolder" runat="server"></asp:ContentPlaceHolder>
     </title>
+
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
     <!-- Layout stylesheet -->
     <link rel="stylesheet" href="style.css" />
@@ -34,7 +36,7 @@
         <div class="containter-fluid" style="max-width: 100%; height: 100%;">
 
             <!-- Navbar -->
-            <div class="navbar navbar-expand-lg navbar-dark navbar-fill fixed-top">
+            <header class="navbar navbar-expand-lg navbar-dark navbar-fill fixed-top">
                 <div style="width: 5%;">
                     <button id="menu-button" type="button" class="ion-chevron-right"></button>
                 </div>
@@ -42,15 +44,25 @@
                 <h1 id="logo">BgHeaven</h1>
 
                 <div style="width: 5%;"></div>
-            </div>
+            </header>
 
             <!-- Sidebar -->
-            <div id="sidebar" class="sidebar">
+            <nav id="sidebar">
+                <asp:MultiView ID="UserStatusMultiView" runat="server">
+                    <asp:View ID="NotLoggedInView" runat="server">
+                        <div class="btn-group" role="group" style="width: 100%;">
+                            <button id="login" type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
+                            <button id="register" type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
+                        </div>
+                    </asp:View>
 
-                <div class="btn-group" role="group" style="width: 100%;">
-                    <button id="login" type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
-                    <button id="register" type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
-                </div>
+                    <asp:View ID="LoggedInView" runat="server">
+                        Logged in as:
+                        <asp:Label ID="UserNameLabel" runat="server"></asp:Label>
+                        <br />
+                        <asp:LinkButton ID="logout" runat="server" CssClass="btn btn-outline-danger" Text='Logout <i class="ion-locked"></i>' OnClick="logout_Click" />
+                    </asp:View>
+                </asp:MultiView>
 
                 <hr />
 
@@ -77,21 +89,75 @@
 
                 <hr />
                 <footer style="text-align: center; display: block;">
-                    Author: <a href="https://github.com/SlawomirChabowski" class="author-link">Sławomir Chabowski <i class="ion-social-github"></i></a>
+                    Author: <a target="_blank" href="https://github.com/SlawomirChabowski" class="author-link">Sławomir Chabowski <i class="ion-social-github"></i></a>
                 </footer>
 
-            </div>
+            </nav>
 
             <!-- Site content -->
             <div id="content" class="container bg-light">
+                <noscript>
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Warning!</h4>
+                        <hr />
+                        <p>
+                            You have disabled running scripts on this website - the application will not work properly.
+                            <br />
+                            Please ensure that you turned on scripts on this website and refresh your browser.
+                        </p>
+                    </div>
+                </noscript>
                 <asp:ContentPlaceHolder ID="WebsiteContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
             </div>
 
         </div>
+
+        <!-- Registration form -->
+        <div id="lightbox-register" class="lightbox-bg" style="display: none;">
+            <div class="lightbox bg-light">
+                <h2>Create new account</h2>
+                <hr />
+                <div class="form-group site-form">
+                    <asp:TextBox runat="server" ID="r_LoginTextBox" placeholder="Login" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="r_PasswordTextBox" placeholder="Password" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="r_RepeatPasswordTextBox" placeholder="Repeat password" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="r_EmailTextBox" placeholder="Email address" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="r_AboutTextBox" placeholder="* Tell us something about you..." CssClass="form-control" Rows="3" TextMode="MultiLine"></asp:TextBox>
+                    <br />
+                    <asp:Button runat="server" ID="CreateAccountButton" Text="Submit" CssClass="btn btn-success btn-block" OnClick="CreateAccountButton_Click" />
+                    <button id="cancelRegisterButton" type="button" class="btn btn-danger btn-block">Cancel</button>
+                    <hr />
+                    * You do not have to fill the <i>about</i> field
+                </div>
+            </div>
+            <asp:SqlDataSource runat="server" ID="CreateUserDataSource" ConnectionString="<%$ ConnectionStrings:ProkektConnectionString %>" InsertCommand="INSERT INTO t_user (name, password, email, about) VALUES (@login, @password, @email, @about)" SelectCommand="SELECT * FROM [t_user]">
+                <InsertParameters>
+                    <asp:ControlParameter ControlID="r_LoginTextBox" DefaultValue="" Name="login" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="r_PasswordTextBox" DefaultValue="" Name="password" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="r_EmailTextBox" DefaultValue="" Name="email" PropertyName="Text" />
+                    <asp:ControlParameter ControlID="r_AboutTextBox" DefaultValue="" Name="about" PropertyName="Text" />
+                </InsertParameters>
+            </asp:SqlDataSource>
+        </div>
+
+        <!-- Login form -->
+        <div id="lightbox-login" class="lightbox-bg" style="display: none;">
+            <asp:Panel ID="LoginPanel" runat="server" DefaultButton="LoginButton" CssClass="lightbox bg-light">
+                <h2>Login</h2>
+                <hr />
+                <div class="form-group site-form">
+                    <asp:TextBox runat="server" ID="l_LoginTextBox" placeholder="Login" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="l_PasswordTextBox" placeholder="Password" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                    <asp:Button runat="server" ID="LoginButton" Text="Login" CssClass="btn btn-success btn-block" OnClick="LoginButton_click" />
+                    <button id="cancelLoginButton" type="button" class="btn btn-danger btn-block">Cancel</button>
+                </div>
+            </asp:Panel>
+        </div>
+
     </form>
 
     <!-- Sidebar scripts -->
-    <script type="text/javascript">
+    <script>
 
         // Toggling sidebar
         var button = $("#menu-button");
@@ -108,19 +174,23 @@
 
 
         // Toggling the logging / registration form
-        $("#login").click(function () {
-            $("#form1").append($('<div class="lightbox-bg">').load("Login.aspx"));
-        });
-
         $("#register").click(function () {
-            $("#form1").append($('<div class="lightbox-bg">').load("Register.aspx"));
+            $("#lightbox-register").slideToggle();
         });
 
-        $(document).on("click", "#cancelButton", function () {
-            $("#cancelButton").parent().parent().parent().remove();
+        $("#login").click(function () {
+            $("#lightbox-login").slideToggle();
         });
 
-    </script> 
+        $(document).on("click", "#cancelRegisterButton", function () {
+            $("#lightbox-register").slideToggle();
+        });
+
+        $(document).on("click", "#cancelLoginButton", function () {
+            $("#lightbox-login").slideToggle();
+        });
+
+    </script>
 
 </body>
 </html>
