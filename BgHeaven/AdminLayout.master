@@ -9,10 +9,11 @@
         <asp:ContentPlaceHolder ID="TitlePlaceHolder" runat="server"></asp:ContentPlaceHolder>
     </title>
 
-    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
 
     <!-- Layout stylesheet -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="App_Themes/AdminPanel/AdminPanel.css" />
 
     <!-- Mobile devices integrity -->
     <meta name="viewport" content="initial-scale=1.0">
@@ -33,99 +34,128 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="containter-fluid" style="max-width: 100%; height: 100%;">
+        <asp:MultiView ID="AdminMultiView" runat="server">
 
-            <!-- Navbar -->
-            <div class="navbar navbar-expand-lg navbar-light navbar-fill fixed-top">
-                <div style="width: 5%;">
-                    <button id="menu-button" type="button" class="ion-chevron-right"></button>
+            <asp:View ID="AdminView" runat="server">
+                <div class="containter-fluid" style="max-width: 100%; height: 100%;">
+
+                    <!-- Navbar -->
+                    <div class="navbar navbar-expand-lg navbar-light navbar-fill fixed-top">
+                        <div style="width: 5%;">
+                            <button id="menu-button" type="button" class="ion-chevron-right"></button>
+                        </div>
+
+                        <h1 id="logo"><a class="logo-link" href="/">BgHeaven</a></h1>
+
+                        <div style="width: 5%;"></div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div id="sidebar" class="sidebar">
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="btn btn-outline-success" href="/">Home&nbsp;<i class="ion-home"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="logout" runat="server" OnClick="logout_Click" CssClass="btn btn-outline-danger" Text='Logout&nbsp;<i class="ion-log-out"></i>' />
+                            </li>
+                        </ul>
+
+                        <hr />
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light" href="Users">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light" href="#">Wallpapers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light" href="#">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light" href="#">Unexamined reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light" href="#">Examined reports</a>
+                            </li>
+                        </ul>
+                        <hr />
+
+                        <footer style="text-align: center; display: block;">
+                            Author: <a href="https://github.com/SlawomirChabowski" class="author-link">Sławomir Chabowski <i class="ion-social-github"></i></a>
+                        </footer>
+
+                    </div>
+
+                    <!-- Site content -->
+                    <div id="content" class="container bg-light">
+                        <noscript>
+                            <div class="alert alert-danger" role="alert">
+                                <h4 class="alert-heading">Warning!</h4>
+                                <hr />
+                                <p>
+                                    You have disabled running scripts on this website - the application will not work properly.
+                            <br />
+                                    Please ensure that you turned on scripts on this website and refresh your browser.
+                                </p>
+                            </div>
+                        </noscript>
+
+                        <h2>
+                            <asp:ContentPlaceHolder ID="PageNamePlaceHolder" runat="server"></asp:ContentPlaceHolder>
+                        </h2>
+
+                        <nav>
+                            <ol class="breadcrumb">
+                                <asp:ContentPlaceHolder ID="BreadcrumbsContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+                            </ol>
+                        </nav>
+
+                        <asp:ContentPlaceHolder ID="WebsiteContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+
                 </div>
 
-                <h1 id="logo">BgHeaven</h1>
+                <!-- Sidebar scripts -->
+                <script type="text/javascript">
 
-                <div style="width: 5%;"></div>
-            </div>
+                    // Toggling sidebar
+                    var button = $("#menu-button");
+                    button.click(function () {
 
-            <!-- Sidebar -->
-            <div id="sidebar" class="sidebar">
+                        if (this.className == "ion-chevron-right") {
+                            this.className = "ion-chevron-left";
+                        } else {
+                            this.className = "ion-chevron-right";
+                        }
 
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="Users.aspx">Manage users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Login history</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Manage wallpapers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Manage categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Manage votes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Unexamined reports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Examined reports</a>
-                    </li>
-                </ul>
-                <hr />
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="btn btn-outline-primary" href="../">Homepage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-danger" href="#">Logout</a>
-                    </li>
-                </ul>
+                        $("#sidebar").toggle("slide");
+                    });
 
-                <hr />
+                </script>
+            </asp:View>
 
-                <footer style="text-align: center; display: block;">
-                    Author: <a href="https://github.com/SlawomirChabowski" class="author-link">Sławomir Chabowski <i class="ion-social-github"></i></a>
-                </footer>
 
-            </div>
 
-            <!-- Site content -->
-            <div id="content" class="container bg-light">
-                <noscript>
-                    <div class="alert alert-danger" role="alert">
-                        <h4 class="alert-heading">Warning!</h4>
+            <asp:View ID="NotAdminView" runat="server">
+
+                <div id="alert-container">
+                    <div id="authorization-alert">
+                        <h1>Permission denied!</h1>
                         <hr />
-                        <p>
-                            You have disabled running scripts on this website - the application will not work properly.
-                            <br />
-                            Please ensure that you turned on scripts on this website and refresh your browser.
-                        </p>
+                        The following website is accessible for administrators only. Please go back to the main website.
+                        <br />
+                        <br />
+                        <br />
+                        <a href="/" class="btn btn-primary btn-lg btn-block">Home&nbsp;<i class="ion-home"></i></a>
                     </div>
-                </noscript>
-                <asp:ContentPlaceHolder ID="WebsiteContentPlaceHolder" runat="server"></asp:ContentPlaceHolder>
-            </div>
+                </div>
 
-        </div>
+            </asp:View>
+
+        </asp:MultiView>
     </form>
-
-    <!-- Sidebar scripts -->
-    <script type="text/javascript">
-
-        // Toggling sidebar
-        var button = $("#menu-button");
-        button.click(function () {
-
-            if (this.className == "ion-chevron-right") {
-                this.className = "ion-chevron-left";
-            } else {
-                this.className = "ion-chevron-right";
-            }
-
-            $("#sidebar").toggle("slide");
-        });
-
-    </script>
-
 </body>
 </html>

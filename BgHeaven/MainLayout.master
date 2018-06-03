@@ -41,7 +41,7 @@
                     <button id="menu-button" type="button" class="ion-chevron-right"></button>
                 </div>
 
-                <h1 id="logo">BgHeaven</h1>
+                <h1 id="logo"><a class="logo-link" href="/">BgHeaven</a></h1>
 
                 <div style="width: 5%;"></div>
             </header>
@@ -51,7 +51,7 @@
                 <asp:MultiView ID="UserStatusMultiView" runat="server">
                     <asp:View ID="NotLoggedInView" runat="server">
                         <div class="btn-group" role="group" style="width: 100%;">
-                            <button id="login" type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-key"></i></button>
+                            <button id="login" type="button" class="btn btn-outline-success" style="width: 50%;">Log in <i class="ion-log-in"></i></button>
                             <button id="register" type="button" class="btn btn-outline-danger" style="width: 50%;">Register <i class="ion-unlocked"></i></button>
                         </div>
                     </asp:View>
@@ -60,7 +60,14 @@
                         Logged in as:
                         <asp:Label ID="UserNameLabel" runat="server"></asp:Label>
                         <br />
-                        <asp:LinkButton ID="logout" runat="server" CssClass="btn btn-outline-danger" Text='Logout <i class="ion-locked"></i>' OnClick="logout_Click" />
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <asp:LinkButton ID="AdminPanelButton" runat="server" CssClass="btn btn-outline-success" Text='Panel&nbsp<i class="ion-android-options"></i>' OnClick="AdminPanelButton_Click" />
+                            </li>
+                            <li class="nav-item">
+                                <asp:LinkButton ID="logout" runat="server" CssClass="btn btn-outline-danger" Text='Logout&nbsp;<i class="ion-log-out"></i>' OnClick="logout_Click" />
+                            </li>
+                        </ul>
                     </asp:View>
                 </asp:MultiView>
 
@@ -77,13 +84,13 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Home</a>
+                        <a class="btn btn-outline-light" href="./">Home&nbsp;<i class="ion-home"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Categories</a>
+                        <a class="btn btn-outline-light" href="#">Categories&nbsp;<i class="ion-star"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">About</a>
+                        <a class="btn btn-outline-light" href="#">About&nbsp;<i class="ion-information-circled"></i></a>
                     </li>
                 </ul>
 

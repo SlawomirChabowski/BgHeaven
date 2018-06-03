@@ -1,6 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Pacifico');
 
-
 html {
     min-height: 100vh !important;
     height: 100vh;
@@ -12,6 +11,7 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background: linear-gradient(to right, #9C27B0, #AD1457);
 }
 
 #sidebar {
@@ -59,6 +59,11 @@ body {
     background: linear-gradient(#202020, #282828);
 }
 
+.logo-link, .logo-link:hover, .logo-link:visited, .logo-link:active {
+    text-decoration: none;
+    color: #fff;
+}
+
 #menu-button, #menu-button:active, #menu-button:hover, #menu-button:visited {
     text-decoration: none;
     font-weight: 900;
@@ -74,6 +79,10 @@ body {
     margin-bottom: 5px;
     font-size: 28px;
     color: #fff;
+}
+
+.image-container {
+    column-gap: 0;
 }
 
 

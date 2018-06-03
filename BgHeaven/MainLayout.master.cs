@@ -49,7 +49,8 @@ public partial class MainLayout : System.Web.UI.MasterPage
     {
         // connect to database and select the user
         SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ProkektConnectionString"].ConnectionString);
-        SqlCommand command = new SqlCommand("SELECT name FROM t_user WHERE name = @name AND password = @password;", conn);
+        // select rank to recognize administrators
+        SqlCommand command = new SqlCommand("SELECT rank FROM t_user WHERE name = @name AND password = @password;", conn);
 
         // hash the password
         string pwd_hash = PasswordHash.Create(l_PasswordTextBox.Text);
@@ -71,6 +72,9 @@ public partial class MainLayout : System.Web.UI.MasterPage
                 // make being logged in visible for user
                 UserStatusMultiView.SetActiveView(LoggedInView);
                 UserNameLabel.Text = Session["login"].ToString();
+
+                // add rank as a session value
+                Session["rank"] = command.ExecuteScalar();
             }
             else
             {
@@ -90,7 +94,13 @@ public partial class MainLayout : System.Web.UI.MasterPage
     protected void logout_Click(object sender, EventArgs e)
     {
         Session["login"] = null;
+        Session["rank"] = null;
         UserStatusMultiView.SetActiveView(NotLoggedInView);
+    }
+
+    protected void AdminPanelButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("panel");
     }
 
 }

@@ -10,6 +10,8 @@
 <!-- A repeater to print images from the data source -->
 <asp:repeater runat="server" datasourceid="ImgListDataSource">
     <ItemTemplate>
-        <img class="img-thumbnail thumb" src='content/wallpapers/<%#Eval("filename") %>' alt='<%#Eval("name") %>' />
+        <a href='View.aspx?img=<%#Eval("id") %>' target="_blank">
+            <img class="img-thumbnail thumb" src='content/wallpapers/<%#Eval("filename") %>' alt='<%#Eval("name") %>' />
+        </a>
     </ItemTemplate>
 </asp:repeater>
