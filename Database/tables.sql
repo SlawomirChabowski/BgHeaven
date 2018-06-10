@@ -1,6 +1,6 @@
 -- user accounts
 CREATE TABLE t_user (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	name VARCHAR(30) NOT NULL UNIQUE,
 	email VARCHAR(500) NOT NULL UNIQUE CHECK (email LIKE '%@%.%'),
 	password CHAR(96) NOT NULL CHECK (LEN(password) >= 6),
@@ -14,20 +14,20 @@ CREATE TABLE t_user (
 
 -- logging history
 CREATE TABLE t_login_history (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	date DATETIME NOT NULL DEFAULT GETDATE(),
 	user_id INT NOT NULL FOREIGN KEY REFERENCES t_user(id)
 );
 
 -- image categories
 CREATE TABLE t_category (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	name VARCHAR(30) NOT NULL UNIQUE
 );
 
 -- images
 CREATE TABLE t_image (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	tags VARCHAR(1000),												-- separated by spacebars
 	date_added DATETIME NOT NULL DEFAULT GETDATE(),
@@ -47,7 +47,7 @@ CREATE TABLE t_image (
 
 -- if user decided to report an inappropriate image
 CREATE TABLE t_report (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	date_added DATETIME NOT NULL DEFAULT GETDATE(),
 	reason VARCHAR(1000) NOT NULL,
 	status INT NOT NULL DEFAULT 0,									-- 0 if under review, 1 if reviewed succesfully, 2 if not
@@ -58,7 +58,7 @@ CREATE TABLE t_report (
 
 -- if user decided to give a star to an image
 CREATE TABLE t_vote (
-	id INT IDENTITY(1, 1) PRIMARY KEY,
+	id INT IDENTITY(100, 1) PRIMARY KEY,
 	image_id INT NOT NULL FOREIGN KEY REFERENCES t_image(id),
 	user_id INT NOT NULL FOREIGN KEY REFERENCES t_user(id),
 	value INT NOT NULL CHECK (value >= 1 AND value <= 5)

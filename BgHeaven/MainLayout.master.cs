@@ -55,8 +55,7 @@ public partial class MainLayout : System.Web.UI.MasterPage
         // connect to database and select the user
         SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ProkektConnectionString"].ConnectionString);
         // select rank to recognize administrators
-        SqlCommand command = new SqlCommand("SELECT rank FROM t_user WHERE name = @name AND password = @password;", conn);
-
+        SqlCommand command = new SqlCommand("SELECT id, name, rank FROM t_user WHERE name = @name AND password = @password;", conn);
         // hash the password
         string pwd_hash = PasswordHash.Create(l_PasswordTextBox.Text);
 
@@ -71,15 +70,23 @@ public partial class MainLayout : System.Web.UI.MasterPage
             // if found an user
             if (command.ExecuteScalar() != null)
             {
-                // change value of login property
-                Session["login"] = l_LoginTextBox.Text;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // change value of logged in user id
+                        Session["id"] = reader[0];
+                        // change value of login property
+                        Session["login"] = reader[1];
+                        // add rank as a session value
+                        Session["rank"] = reader[2];
+                    }
+                }
 
                 // make being logged in visible for user
                 UserStatusMultiView.SetActiveView(LoggedInView);
                 UserNameLabel.Text = Session["login"].ToString();
 
-                // add rank as a session value
-                Session["rank"] = command.ExecuteScalar();
             }
             else
             {
@@ -98,6 +105,7 @@ public partial class MainLayout : System.Web.UI.MasterPage
     // logout
     protected void logout_Click(object sender, EventArgs e)
     {
+        Session["id"] = null;
         Session["login"] = null;
         Session["rank"] = null;
         UserStatusMultiView.SetActiveView(NotLoggedInView);
