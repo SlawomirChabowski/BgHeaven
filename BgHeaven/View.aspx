@@ -12,13 +12,19 @@
                 <ItemTemplate>
                     <figure class="figure">
 
-                        <h3><%#Eval("name") %></h3>
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h3><%#Eval("name") %></h3>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href='content/wallpapers/<%#Eval("filename") %>' download="true" class="btn btn-success btn-block">Download this wallpaper&nbsp;<i class="ion-android-download"></i></a>
+                            </div>
+                        </div>
 
                         <img alt='<%#Eval("name") %>'
                             src='content/wallpapers/<%#Eval("filename") %>'
                             class="img-fluid figure-img img-fluid rounded" />
 
-                        <a href='content/wallpapers/<%#Eval("filename") %>' download class="btn btn-lg btn-success btn-block btn-lg">Download this wallpaper&nbsp;<i class="ion-android-download"></i></a>
                         <table class="figure-caption">
                             <tr>
                                 <th>Category:&nbsp;</th>

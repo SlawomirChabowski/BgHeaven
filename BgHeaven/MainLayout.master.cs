@@ -87,6 +87,11 @@ public partial class MainLayout : System.Web.UI.MasterPage
                 UserStatusMultiView.SetActiveView(LoggedInView);
                 UserNameLabel.Text = Session["login"].ToString();
 
+                if (Convert.ToInt32(Session["rank"]) == 1)
+                    AdminPanelButton.Visible = true;
+                else
+                    AdminPanelButton.Visible = false;
+
             }
             else
             {

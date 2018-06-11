@@ -16,8 +16,8 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="WebsiteContentPlaceHolder" runat="Server">
 
-    <asp:LinkButton ID="ViewBannedLinkButton" runat="server" CssClass="btn btn-danger">View banned</asp:LinkButton>
-    <asp:LinkButton ID="ViewAdminsLinkButton" runat="server" CssClass="btn btn-info">View admins</asp:LinkButton>
+    <a href="Admins.aspx" class="btn btn-info">View admins</a>
+    <a href="Banned.aspx" class="btn btn-danger">View banned users</a>
 
     <br />
     <br />
