@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="WebsiteContentPlaceHolder" runat="Server">
 
-    <asp:MultiView ID="LoggedInMultiView" runat="server">
+    <asp:multiview id="LoggedInMultiView" runat="server">
 
         <asp:View ID="NotLoggedInView" runat="server">
             <h3>You are not logged in!</h3>
@@ -24,6 +24,7 @@
                 <asp:FileUpload ID="WallpaperFileUpload" runat="server" CssClass="custom-file-input" />
                 <label class="custom-file-label" for="customFile">Choose wallpaper *</label>
                 <small class="form-text text-muted">Only <i>.png</i>, <i>.jpg</i>, <i>.jpeg</i> and <i>.gif</i> file types are accepted.</small>
+                <asp:RequiredFieldValidator runat="server" ErrorMessage="This field is required!" ControlToValidate="WallpaperFileUpload"></asp:RequiredFieldValidator>
             </div>
 
             <br />
@@ -34,6 +35,7 @@
                 <div class="col-sm-10">
                     <asp:TextBox ID="NameTextBox" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
+                <asp:RequiredFieldValidator runat="server" ErrorMessage="This field is required!" ControlToValidate="NameTextBox"></asp:RequiredFieldValidator>
             </div>
 
             <div class="form-group row">
@@ -43,6 +45,7 @@
                         <asp:ListItem Text="" Value="" />
                     </asp:DropDownList>
                 </div>
+                <asp:RequiredFieldValidator runat="server" ErrorMessage="This field is required!" ControlToValidate="CategoriesDropDownList"></asp:RequiredFieldValidator>
                 <asp:SqlDataSource ID="CategoriesDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:ProkektConnectionString %>" SelectCommand="SELECT * FROM [t_category]"></asp:SqlDataSource>
             </div>
 
@@ -80,7 +83,7 @@
             </asp:SqlDataSource>
         </asp:View>
 
-    </asp:MultiView>
+    </asp:multiview>
 
 </asp:Content>
 
