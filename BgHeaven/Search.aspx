@@ -22,7 +22,7 @@
             if (shouldAsk && ($(window).scrollTop() >= (($(document).height() - $(window).height()) - $('content').innerHeight()))) {
 
                 // preparating the new node to append
-                newNode = ($('<section class="image-container">').load('ImageList.aspx?search=' + i + '&tags=' + tag, function (response, status, xhr) {
+                newNode = ($('<section class="image-container">').load('SearchResults.aspx?img=' + i + '&tags=' + tag, function (response, status, xhr) {
 
                     // check if node is empty (contains 121 characters - comments and spaces)
                     if (response.length > 121) {
