@@ -121,4 +121,9 @@ public partial class MainLayout : System.Web.UI.MasterPage
         Response.Redirect("panel");
     }
 
+
+    protected void SearchButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Search.aspx?q=" + SearchTextBox.Text);
+    }
 }

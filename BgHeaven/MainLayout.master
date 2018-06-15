@@ -74,9 +74,9 @@
                 <hr />
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search for images and users">
+                    <asp:TextBox ID="SearchTextBox" runat="server" CssClass="form-control" placeholder="Search for images"></asp:TextBox>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-light" id="basic-addon2"><i class="ion-search"></i></button>
+                        <asp:LinkButton ID="SearchButton" runat="server" Text="<i class='ion-search'></i>" CssClass="btn btn-outline-light" OnClick="SearchButton_Click"/>
                     </div>
                 </div>
 
