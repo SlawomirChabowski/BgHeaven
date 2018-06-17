@@ -28,7 +28,7 @@
                         <table class="figure-caption">
                             <tr>
                                 <th>Category:&nbsp;</th>
-                                <td><%#Eval("category_name") %></td>
+                                <td><a class="btn-link" href='ViewCategory.aspx?cat=<%# Eval("category_id") %>'><%# Eval("category_name") %></a></td>
                             </tr>
                             <tr>
                                 <th>Tags:&nbsp;</th>
@@ -62,7 +62,7 @@
 
     </asp:MultiView>
 
-    <asp:SqlDataSource runat="server" ID="ImgDataSource" ConnectionString="<%$ ConnectionStrings:ProkektConnectionString %>" SelectCommand="SELECT t_image.name, t_image.tags, t_image.date_added, t_image.description, t_image.filename, t_image.download_counter, t_user.name AS user_name, t_category.name AS category_name FROM t_image INNER JOIN t_user ON t_image.author_id = t_user.id INNER JOIN t_category ON t_image.category_id = t_category.id WHERE (t_image.id = @id)">
+    <asp:SqlDataSource runat="server" ID="ImgDataSource" ConnectionString="<%$ ConnectionStrings:ProkektConnectionString %>" SelectCommand="SELECT t_image.name, t_image.tags, t_image.date_added, t_image.description, t_image.filename, t_user.name AS user_name, t_image.category_id, t_category.name AS category_name FROM t_image INNER JOIN t_user ON t_image.author_id = t_user.id INNER JOIN t_category ON t_image.category_id = t_category.id WHERE (t_image.id = @id)">
         <SelectParameters>
             <asp:QueryStringParameter DefaultValue="0" Name="id" QueryStringField="img" />
         </SelectParameters>

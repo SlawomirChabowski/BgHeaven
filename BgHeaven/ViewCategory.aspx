@@ -1,9 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainLayout.master" AutoEventWireup="true" CodeFile="Search.aspx.cs" Inherits="Search" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainLayout.master" AutoEventWireup="true" CodeFile="ViewCategory.aspx.cs" Inherits="ViewCategory" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitlePlaceHolder" runat="Server">
-    Search | BgHeaven
+<asp:Content ID="Content1" ContentPlaceHolderID="TitlePlaceHolder" Runat="Server">
+    BgHeaven
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="WebsiteContentPlaceHolder" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="WebsiteContentPlaceHolder" Runat="Server">
+
     <script>
         $.urlParam = function (name) {
             var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -11,10 +12,10 @@
         }
 
         var i = 0;
-        var tag = $.urlParam('q');
+        var cat = $.urlParam('cat');
         var shouldAsk = true;
 
-        $('#content').append($('<section class="image-container">').load('SearchResults.aspx?img=' + i + '&tags=' + tag));
+        $('#content').append($('<section class="image-container">').load('CatView.aspx?img=' + i + '&cat=' + cat));
         i++;
 
         $(window).scroll(function () {
@@ -23,7 +24,7 @@
             if (shouldAsk && ($(window).scrollTop() >= (($(document).height() - $(window).height()) - $('content').innerHeight()))) {
 
                 // preparating the new node to append
-                newNode = ($('<section class="image-container">').load('SearchResults.aspx?img=' + i + '&tags=' + tag, function (response, status, xhr) {
+                newNode = ($('<section class="image-container">').load('CatView.aspx?img=' + i + '&cat=' + tag, function (response, status, xhr) {
 
                     // check if node is empty (contains 121 characters - comments and spaces)
                     if (response.length > 121) {
@@ -38,4 +39,6 @@
         });
 
     </script>
+
 </asp:Content>
+

@@ -90,10 +90,7 @@
                         <a class="btn btn-outline-light" href="Upload.aspx">Upload&nbsp;<i class="ion-upload"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">Categories&nbsp;<i class="ion-star"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light" href="#">About&nbsp;<i class="ion-information-circled"></i></a>
+                        <a class="btn btn-outline-light" href="Categories.aspx">Categories&nbsp;<i class="ion-star"></i></a>
                     </li>
                 </ul>
 
